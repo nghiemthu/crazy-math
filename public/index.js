@@ -201,8 +201,8 @@ function updateNameAndHighscore(){
 
 function putData(name, point){
  
-   $.getJSON( "https://crazy-math.herokuapp.com/" + name +'/'+point, function(data) {
-    //alert(data[0].name + ': ' + data[0].point );
-    updateNameAndHighscore();
+   $.post( "https://crazy-math.herokuapp.com/create", { name: name, point: point })
+  .done(function( data ) {
+    console.log("Post");
   });
 }

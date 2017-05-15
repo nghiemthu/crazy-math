@@ -1,3 +1,4 @@
+var bodyParser = require('body-parser');
 var express =require('express');
 var app =express();
 var fs =require('fs');
@@ -7,6 +8,12 @@ var points =JSON.parse(data);
  
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(function (req, res, next) {
     "use strict";
@@ -20,7 +27,6 @@ app.use(function (req, res, next) {
 
 
 app.put("/:name/:point", sendPoint);
-app.get("/:name/:point", sendPoint);
 function sendPoint(req, res){
 	var data = req.params;
 	var name = data.name;
@@ -31,6 +37,18 @@ function sendPoint(req, res){
 	fs.writeFile("points.json",JSON.stringify(points), finished);
 	res.send(points);
 };
+
+app.post("/create", function(req, res){
+
+    var data = req.body;
+	var name = data.name;
+	var point = Number(data.point);
+    
+    points.shift();
+	points.push({"name":name, "point": point});
+	fs.writeFile("points.json",JSON.stringify(points), finished);
+    res.send("Post");
+});
 
 function finished(err){
 	if(err){
