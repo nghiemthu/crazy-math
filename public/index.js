@@ -190,7 +190,7 @@ setInterval(function() {
 
 function updateNameAndHighscore(){
   //Get json
-  $.getJSON( "https://crazy-math-thunghiem.c9users.io/get", function(data) {
+  $.getJSON( "https://crazy-math.herokuapp.com/get", function(data) {
     //alert(data.name + ': ' + data.point );
     highestPerson = data[0].name;
     bestScore = data[0].point;
@@ -201,7 +201,7 @@ function updateNameAndHighscore(){
 
 function putData(name, point){
  
-   $.getJSON( "https://crazy-math-thunghiem.c9users.io/" + name +'/'+point, function(data) {
+   $.getJSON( "https://crazy-math.herokuapp.com/" + name +'/'+point, function(data) {
     //alert(data[0].name + ': ' + data[0].point );
     updateNameAndHighscore();
   });
