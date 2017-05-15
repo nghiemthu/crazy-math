@@ -56,14 +56,16 @@ function finished(err){
 	};
 };
 
-app.get("/*", function(req, res){
-    res.render('index');
-});
-
 app.get("/get", getPoint);
 function getPoint(req, res){
 	res.send(points);
 }
+
+app.get("/*", function(req, res){
+    res.render('index');
+});
+
+
 
 // Start server
 app.listen(process.env.PORT, process.env.IP, function(){

@@ -200,7 +200,6 @@ function updateNameAndHighscore(){
 }
 
 function putData(name, point){
- 
    $.post( "https://crazy-math.herokuapp.com/create", { name: name, point: point })
   .done(function( data ) {
     console.log("Post");
